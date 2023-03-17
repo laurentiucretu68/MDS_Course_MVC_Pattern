@@ -1,0 +1,23 @@
+{
+  "name": "mvc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --watch 'app.ts' --exec 'ts-node' app.ts"
+  },
+  "keywords": [],
+  "author": "Laurentiu Vasile Creu - laurentiucretu13@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/swagger": "^8.3.1",
+    "@fastify/swagger-ui": "^1.5.0",
+    "@sinclair/typebox": "^0.25.24",
+    "dotenv": "^16.0.3",
+    "fastify": "^4.14.1",
+    "mongoose": "^7.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.3"
+  }
+}
