@@ -5,3 +5,7 @@ build
 .idea
 .vscode
 .DS_Store
+
+template/.angular
+template/.vscode
+template/node_modules

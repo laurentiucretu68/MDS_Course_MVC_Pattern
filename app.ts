@@ -2,6 +2,7 @@ import "dotenv/config";
 import Fastify, { FastifyInstance } from "fastify";
 import { userRouter } from "./src/routes";
 import { connectToDatabase, closeDatabaseConnection} from "./src/model";
+import cors from "@fastify/cors";
 
 const fastify: FastifyInstance = Fastify({
     logger: true
@@ -10,6 +11,7 @@ const fastify: FastifyInstance = Fastify({
 (async () => {
    try {
        await connectToDatabase()
+       await fastify.register(cors)
 
        await fastify.register(require('@fastify/swagger'))
        await fastify.register(require('@fastify/swagger-ui'), {
