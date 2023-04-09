@@ -1,3 +1,9 @@
 form {
   color: #303030;
 }
+
+.error-message {
+  color: crimson;
+  width: 100%;
+  padding: 5px
+}

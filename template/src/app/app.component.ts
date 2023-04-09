@@ -31,7 +31,10 @@ export class AppComponent implements OnInit {
 
   public openUserModal(){
     this.modalRef = this.modalService.open(ModalComponent)
-    this.getUsers()
+
+    this.modalRef.onClose.subscribe(() => {
+      this.getUsers()
+    })
   }
 
   public getUsers() {
@@ -42,12 +45,6 @@ export class AppComponent implements OnInit {
 
   public deleteUser(_id: string) {
     this.http.delete(`${environment.apiUrl}/user/${_id}`).subscribe(() => {
-      this.getUsers()
-    })
-  }
-
-  public insertUser(user: User) {
-    this.http.post(`${environment.apiUrl}/user`, user).subscribe(() => {
       this.getUsers()
     })
   }

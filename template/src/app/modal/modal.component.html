@@ -1,39 +1,57 @@
-<form (ngSubmit)="addUser(newUser)">
-<div class="modal-header">
-  <h5 class="modal-title" id="exampleModalLabel">Add new user</h5>
-  <button
-    type="button"
-    class="btn-close"
-    aria-label="Close"
-    (click)="modalRef.close()"
-  ></button>
-</div>
-<div class="modal-body">
+<form [formGroup]="addUserForm" (ngSubmit)="insertUser()">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Add new user</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalRef.close()"></button>
+  </div>
+  <div class="modal-body">
+
     <div class="form-group">
       <label for="nameInput">Name</label>
-      <input type="text" [(ngModel)]="newUser.name" name="name" class="form-control" id="nameInput" placeholder="Andrei Ionescu">
+      <input type="text" class="form-control" formControlName="name" name="name" id="nameInput" placeholder="Andrei Ionescu" required>
+      <div *ngIf="submitted && addUserForm.get('name')?.invalid">
+        <div *ngIf="addUserForm.get('name')?.errors?.required" class="error-message">*Name is required</div>
+        <div *ngIf="addUserForm.get('name')?.errors?.minLength" class="error-message">*Name must be at least 5 characters long</div>
+      </div>
     </div>
 
-  <div class="form-group">
-    <label for="emailInput">Email address</label>
-    <input type="email" [(ngModel)]="newUser.email" name="email" class="form-control" id="emailInput" placeholder="name@email.com">
-  </div>
+    <div class="form-group">
+      <label for="emailInput">Email address</label>
+      <input type="email" formControlName="email" name="email" class="form-control" id="emailInput" placeholder="name@email.com" required>
+      <div *ngIf="submitted && addUserForm.get('email')?.invalid">
+        <div *ngIf="addUserForm.get('email')?.errors?.required" class="error-message">*Email is required</div>
+        <div *ngIf="addUserForm.get('email')?.errors?.email" class="error-message">*Email must be a valid email address</div>
+      </div>
+    </div>
 
-  <div class="form-group">
-    <label for="ageInput">Age</label>
-    <input type="number" [(ngModel)]="newUser.age" name="age" class="form-control" id="ageInput" placeholder="20">
-  </div>
+    <div class="form-group">
+      <label for="ageInput">Age</label>
+      <input type="number" name="age" formControlName="age" class="form-control" id="ageInput" placeholder="20" required>
+      <div *ngIf="submitted && addUserForm.get('age')?.invalid">
+        <div *ngIf="addUserForm.get('age')?.errors?.required" class="error-message">*Age is required</div>
+        <div *ngIf="addUserForm.get('age')?.errors?.min" class="error-message">*Age must be grater than 14</div>
+        <div *ngIf="addUserForm.get('age')?.errors?.max" class="error-message">*Age must be smaller than 120</div>
+      </div>
+    </div>
 
-  <div class="form-group">
-    <label for="phoneInput">Phone number</label>
-    <input type="text" [(ngModel)]="newUser.phoneNumber" min="14" name="phoneNumber" class="form-control" id="phoneInput" placeholder="0766666666">
-  </div>
+    <div class="form-group">
+      <label for="phoneInput">Phone number</label>
+      <input type="text" min="14" formControlName="phoneNumber" name="phoneNumber" class="form-control" id="phoneInput" placeholder="0766666666" required>
+      <div *ngIf="submitted && addUserForm.get('phoneNumber')?.invalid">
+        <div *ngIf="addUserForm.get('phoneNumber')?.errors?.required" class="error-message">*Phone number is required</div>
+        <div *ngIf="addUserForm.get('phoneNumber')?.errors?.minLength" class="error-message">*Phone number must be at least 5 characters long</div>
+      </div>
+    </div>
 
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="modalRef.close()">
-    Close
-  </button>
-  <button type="submit" class="btn btn-primary">Save changes</button>
-</div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modalRef.close()">
+      Close
+    </button>
+    <button type="submit" class="btn btn-primary">Save changes</button>
+  </div>
 </form>
+
